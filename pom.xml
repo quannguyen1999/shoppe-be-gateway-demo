@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.shopee.ecommer</groupId>
 	<artifactId>shopee-be-gateway-demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>latest</version>
 	<name>shopee-be-gateway-demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -69,6 +69,23 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!--				<configuration>-->
+				<!--					<image>-->
+				<!--						<name>-->
+				<!--							quannguyen1999/${project.artifactId}:${project.version}-->
+				<!--						</name>-->
+				<!--					</image>-->
+				<!--				</configuration>-->
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
+				<configuration>
+					<to>
+						<image>quannguyen1999/${project.artifactId}:${project.version}</image>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
