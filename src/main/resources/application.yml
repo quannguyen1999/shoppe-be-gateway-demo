@@ -1,3 +1,6 @@
+server:
+  port: 8073
+
 spring:
   profiles:
     active: dev
@@ -9,5 +12,41 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
           lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 2s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      #      Diagnolist at least 10 api
+      slidingWindowSize: 10
+      #      Set number of call in half open
+      permittedNumberOfCallsInHalfOpenState: 2
+      #      Make sure failure in 50%
+      failureRateThreshold: 50
+      #     Duration is 10s
+      waitDurationInOpenState: 10000
+
+#Eureka
+eureka:
+  preferIdAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8072/eureka/
